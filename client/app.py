@@ -36,13 +36,13 @@ st.markdown(
 # User inputs
 st.sidebar.header("🎨 User Inputs")
 sepal_length = st.sidebar.number_input(
-    "🌳 Sepal Length (cm)", min_value=0.0, format="%.2f")
+    "Sepal Length (cm)", min_value=0.0, format="%.2f")
 sepal_width = st.sidebar.number_input(
-    "🌳 Sepal Width (cm)", min_value=0.0, format="%.2f")
+    "Sepal Width (cm)", min_value=0.0, format="%.2f")
 petal_length = st.sidebar.number_input(
-    "🌿 Petal Length (cm)", min_value=0.0, format="%.2f")
+    "Petal Length (cm)", min_value=0.0, format="%.2f")
 petal_width = st.sidebar.number_input(
-    "🌿 Petal Width (cm)", min_value=0.0, format="%.2f")
+    "Petal Width (cm)", min_value=0.0, format="%.2f")
 
 # Prediction button
 if st.sidebar.button("🔬 Predict"):
