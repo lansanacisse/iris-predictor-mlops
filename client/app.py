@@ -1,64 +1,75 @@
 import streamlit as st
 import requests
 
-# Configuration de la page
+# Page configuration
 st.set_page_config(
-    page_title="Prédiction des fleurs d'Iris",
-    page_icon="🌸",  
+    page_title="Iris Flower Prediction",
+    page_icon="🌸",  # Flower emoji
     layout="centered",
-    initial_sidebar_state="auto",
+    initial_sidebar_state="expanded",
 )
-# Titre de l'application
-st.title("Prédiction des fleurs d'Iris avec Animations 🌸")
 
-# Correspondance entre les classes et les noms des fleurs
+# Application title
+st.title("🌸 Iris Flower Prediction 🌸")
+
+# Mapping between class indices and flower names
 CLASS_NAMES = {
     0: "Iris-setosa",
     1: "Iris-versicolor",
     2: "Iris-virginica"
 }
 
-# Liens vers des images pour chaque type de fleur
+# Links to images for each flower type
 CLASS_IMAGES = {
-    0: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Irissetosa1.jpg",  # Image Iris-setosa
-    1: "https://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg",  # Image Iris-versicolor
-    2: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Iris_virginica.jpg"  # Image Iris-virginica
+    0: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Irissetosa1.jpg",  # Iris-setosa image
+    1: "https://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg",  # Iris-versicolor image
+    2: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Iris_virginica.jpg"  # Iris-virginica image
 }
 
+# Adding a description
+st.markdown(
+    """Welcome to the Iris Flower Prediction app! ✨ 
+    Enter the flower dimensions in the sidebar → and get an instant prediction along with a beautiful image. 💐
+    """
+)
 
-# Entrées utilisateur
-st.sidebar.header("Entrées utilisateur")
-sepal_length = st.sidebar.number_input("Longueur du sépale (cm)", min_value=0.0, format="%.2f")
-sepal_width = st.sidebar.number_input("Largeur du sépale (cm)", min_value=0.0, format="%.2f")
-petal_length = st.sidebar.number_input("Longueur du pétale (cm)", min_value=0.0, format="%.2f")
-petal_width = st.sidebar.number_input("Largeur du pétale (cm)", min_value=0.0, format="%.2f")
+# User inputs
+st.sidebar.header("🎨 User Inputs")
+sepal_length = st.sidebar.number_input(
+    "🌳 Sepal Length (cm)", min_value=0.0, format="%.2f")
+sepal_width = st.sidebar.number_input(
+    "🌳 Sepal Width (cm)", min_value=0.0, format="%.2f")
+petal_length = st.sidebar.number_input(
+    "🌿 Petal Length (cm)", min_value=0.0, format="%.2f")
+petal_width = st.sidebar.number_input(
+    "🌿 Petal Width (cm)", min_value=0.0, format="%.2f")
 
-# Bouton de prédiction
-if st.sidebar.button("Prédire"):
+# Prediction button
+if st.sidebar.button("🔬 Predict"):
     features = [sepal_length, sepal_width, petal_length, petal_width]
-    
+
     try:
-        # Envoi de la requête POST au serveur FastAPI
+        # Sending POST request to FastAPI server
         response = requests.post("http://server:8000/predict", json={"features": features})
-        
+
         if response.status_code == 200:
             prediction = response.json()["prediction"]
-            flower_name = CLASS_NAMES.get(prediction, "Inconnu")
+            flower_name = CLASS_NAMES.get(prediction, "Unknown")
             image_url = CLASS_IMAGES.get(prediction, None)
-            
-            # Affichage du résultat
-            st.success(f"La fleur prédite est : **{flower_name}** 🌸")
-            
-            # Affichage de l'image correspondante
-            if image_url:
-                st.image(image_url, caption=flower_name, use_container_width=True)
-            
-        else:
-            st.error("Erreur lors de la prédiction. Veuillez réessayer.")
-    except Exception as e:
-        st.error(f"Impossible de se connecter au serveur : {e}")
 
-# Ajout d'un pied de page
+            # Displaying the result
+            st.success(f"The predicted flower is: **{flower_name}** 🌸")
+
+            # Displaying the corresponding image
+            if image_url:
+                st.image(image_url, caption=f"Here is an {flower_name}! 🌿", use_container_width=True)
+
+        else:
+            st.error("⚠️ Error during prediction. Please try again.")
+    except Exception as e:
+        st.error(f"🚫 Unable to connect to the server: {e}")
+
+# Adding a footer
 st.markdown(
     """
     <style>
@@ -70,16 +81,12 @@ st.markdown(
         background-color: #f1f1f1;
         text-align: center;
         padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        font-size: 14px;
     }
     </style>
     <div class="footer">
-        <p style="text-align: center;">Développé par <strong>Lansana CISSE M2 SISE</strong></p>
+        📚 Developed by <strong>Lansana CISSE M2 SISE</strong>
     </div>
     """,
     unsafe_allow_html=True
 )
-
-
