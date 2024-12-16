@@ -30,7 +30,7 @@ mlops-td/
 │   ├── requirements.txt   # Dépendances pour FastAPI
 │   └── Dockerfile         # Image Docker pour le serveur
 │               
-│   └── docker-compose.yml # Orchestration des conteneurs
+│── docker-compose.yml # Orchestration des conteneurs
 │
 └── README.md              # Documentation
 ```
