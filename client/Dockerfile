@@ -6,6 +6,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copier le code de l'application
 COPY app.py /app/app.py
+COPY metrics.py /app/metrics.py
 
 # Définir le répertoire de travail
 WORKDIR /app
