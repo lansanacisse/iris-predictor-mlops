@@ -1,5 +1,6 @@
 uvicorn
 fastapi
 pymongo
+numpy
 joblib
 scikit-learn

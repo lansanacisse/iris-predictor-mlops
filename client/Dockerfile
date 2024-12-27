@@ -1,15 +1,23 @@
-FROM python:3.8-slim
+# Dockerfile for the Streamlit client
+FROM python:3.9-slim
 
-# Installer les dépendances
-COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
-
-# Copier le code de l'application
-COPY app.py /app/app.py
-COPY metrics.py /app/metrics.py
-
-# Définir le répertoire de travail
 WORKDIR /app
 
-# Commande pour démarrer l'application Streamlit
-CMD ["streamlit", "run", "app.py"]
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libopenblas-dev \
+    liblapack-dev \
+    libatlas-base-dev \
+    gfortran \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install dependencies
+COPY client/requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY client/ .
+
+# Run app.py
+CMD ["streamlit", "run", "app.py", "--server.port=8501"]

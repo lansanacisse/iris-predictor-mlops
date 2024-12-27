@@ -2,5 +2,6 @@ streamlit
 requests
 pandas
 matplotlib
+numpy
 seaborn
 scikit-learn

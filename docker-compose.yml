@@ -1,3 +1,5 @@
+# docker-compose.yml
+
 version: '3.8'
 
 services:
@@ -16,9 +18,13 @@ services:
       - mongo
 
   client:
-    build: ./client
+    build:
+      context: .
+      dockerfile: client/Dockerfile
     container_name: streamlit_client
     ports:
       - "8501:8501"
     depends_on:
       - server
+    volumes:
+      - ./server/model.pkl:/app/model.pkl
