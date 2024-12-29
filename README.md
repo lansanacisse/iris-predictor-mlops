@@ -186,7 +186,4 @@ docker-compose up --build
 
 🎉 Enjoy exploring the power of MLOps with this Iris Flower Prediction Project! 🌸
 
---- 
 
-### **Notes**
-This README reflects your updated project structure. If further adjustments are needed, feel free to ask! 😊
