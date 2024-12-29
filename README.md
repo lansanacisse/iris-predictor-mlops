@@ -1,7 +1,3 @@
-Voici un README mis à jour avec votre structure de projet récente :
-
----
-
 # MLOps - Iris Flower Prediction Project 🌸
 
 ## **Description**
