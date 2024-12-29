@@ -2,15 +2,15 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Installer les dépendances
+# Install the required packages
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le reste des fichiers
+# Copy the source code
 COPY . .
 
-# Exposer le port pour FastAPI
+# Expose the port
 EXPOSE 8000
 
-# Commande pour démarrer le serveur
+# Run the server
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,5 +1,7 @@
+# import the necessary packages
 import streamlit as st
 
+# Home page content
 def home_page():
     st.title("Iris Species Predictor")
     st.markdown("""

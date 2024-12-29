@@ -34,10 +34,10 @@ def predict_page():
     if submit_button:
         features = [sepal_length, sepal_width, petal_length, petal_width]
 
-        # Validation: Vérifiez si toutes les valeurs sont à 0.0
+        # Validation: Check if all values are 0.0
         if all(value == 0.0 for value in features):
             st.error("⚠️ Please enter valid values for all flower dimensions!")
-            return  # Arrête l'exécution si les valeurs sont invalides
+            return  # Stop execution if the values are invalid
 
         # Map the model choice to a model name for the backend API
         model_mapping = {

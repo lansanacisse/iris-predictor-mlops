@@ -4,10 +4,10 @@ from pymongo import MongoClient
 import pickle
 import numpy as np
 
-# Initialisation FastAPI
+# Initialize FastAPI
 app = FastAPI()
 
-# Charger les modèles
+# Load models
 models = {}
 try:
     models = {
@@ -20,7 +20,7 @@ try:
 except FileNotFoundError as e:
     print(f"⚠️ Model file not found: {e}")
 
-# Connexion à MongoDB
+# Connect to MongoDB
 try:
     client = MongoClient("mongodb://mongo:27017/")
     db = client["mlops_db"]
@@ -28,31 +28,31 @@ try:
 except Exception as e:
     print(f"🚫 Unable to connect to MongoDB: {e}")
 
-# Schéma des données d'entrée
+# Schema for input data
 class PredictionRequest(BaseModel):
     features: list[float]
     model: str
 
-# Endpoint de prédiction
+# Prediction endpoint
 @app.post("/predict")
 async def predict(data: PredictionRequest):
-    # Vérifier si le modèle existe
+    # Check if the model exists
     model_key = data.model
     print(f"🔍 Received model: {model_key}")
     if model_key not in models:
         raise HTTPException(status_code=400, detail=f"Model '{data.model}' not found.")
 
-    # Préparer les données pour la prédiction
+    # Prepare the data for prediction
     try:
         features = np.array(data.features).reshape(1, -1)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid input features: {e}")
 
-    # Effectuer la prédiction
+    # Perform the prediction
     model = models[model_key]
     prediction = int(model.predict(features)[0])
 
-    # Sauvegarder la prédiction dans MongoDB
+    # Save the prediction to MongoDB
     try:
         record = {"features": data.features, "prediction": prediction, "model": data.model}
         collection.insert_one(record)
@@ -61,16 +61,16 @@ async def predict(data: PredictionRequest):
 
     return {"prediction": prediction, "model_used": data.model}
 
-# Endpoint pour récupérer toutes les prédictions sauvegardées
+# Endpoint to retrieve all saved predictions
 @app.get("/predictions")
 def get_predictions():
     try:
-        predictions = list(collection.find({}, {"_id": 0}))  # Ne pas inclure l'ID MongoDB
+        predictions = list(collection.find({}, {"_id": 0}))  # Do not include MongoDB ID
         return {"predictions": predictions}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unable to fetch predictions: {e}")
 
-# Endpoint pour supprimer toutes les prédictions sauvegardées
+# Endpoint to delete all saved predictions
 @app.delete("/predictions")
 def delete_predictions():
     try:
@@ -79,7 +79,7 @@ def delete_predictions():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Unable to delete predictions: {e}")
 
-# Racine de l'API
+# API root
 @app.get("/")
 def read_root():
-    return {"message": "Bienvenue sur l'API FastAPI pour la prédiction Iris"}
+    return {"message": "Welcome to the FastAPI Iris Prediction API"}

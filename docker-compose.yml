@@ -17,8 +17,8 @@ services:
     depends_on:
       - mongo
     volumes:
-      - ./server/models:/app/models # Modèles utilisés par le backend
-      - ./data:/app/data # Données partagées
+      - ./server/models:/app/models
+      - ./data:/app/data
 
   client:
     build:
@@ -30,6 +30,6 @@ services:
     depends_on:
       - server
     volumes:
-      - ./server:/app/server # Accès au code du serveur
-      - ./data:/app/data # Données partagées
-      - ./server/models:/app/server/models # Modèles utilisés par le backend
+      - ./server:/app/server
+      - ./data:/app/data
+      - ./server/models:/app/server/models
