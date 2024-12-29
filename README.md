@@ -1,189 +1,152 @@
-# MLOps - Iris Flower Prediction Project 🌸
+# **MLOps - Iris Flower Prediction Project** 🌸
 
 ## **Description**
-This project is a Dockerized web application designed to predict the class of Iris flowers (**Iris-setosa**, **Iris-versicolor**, **Iris-virginica**) using a pre-trained **Machine Learning** model. It integrates a **FastAPI** backend, **MongoDB** for persistence, and a user-friendly **Streamlit** interface for training, predicting, and analyzing model performance.
+This project is a Dockerized web application for predicting the class of Iris flowers (**Iris-setosa**, **Iris-versicolor**, **Iris-virginica**) using **Machine Learning** models. It integrates:
+- **FastAPI**: Backend API to handle predictions.
+- **MongoDB**: To store and retrieve predictions.
+- **Streamlit**: For an interactive user interface.
+- **Docker**: To simplify deployment and orchestration.
 
----
 
 ## **Key Features**
-- 🛠 **Train Models**: Train models interactively using various algorithms (**Random Forest**, **SVM**, **Decision Tree**, and **XGBoost**) via the web interface.
-- 🔮 **Predict Classes**: Predict the flower class using the trained models and visualize the predictions with images.
-- 📊 **Analyze Performance**: View detailed metrics, including accuracy, confusion matrices, and classification reports.
-- 🗄 **Store Predictions**: All predictions are saved in **MongoDB** for review and analysis.
+- 🛠 **Train Models**: Train multiple models (**Random Forest**, **SVM**, **Decision Tree**) interactively through the web interface.
+- 🔮 **Predict Classes**: Input flower features and predict the flower class.
+- 📊 **Analyze Metrics**: View metrics like accuracy, confusion matrices, and classification reports.
+- 🗄 **Save Predictions**: All predictions are stored in **MongoDB** for easy access and analysis.
 
----
+
 
 ## **Technologies Used**
-- **FastAPI**: Backend for API endpoints.
-- **MongoDB**: Database for storing predictions.
-- **Streamlit**: User interface for training and predictions.
-- **Docker & Docker Compose**: For containerization and orchestration.
-- **Scikit-learn** and **XGBoost**: For Machine Learning models.
 
----
+| Technology      | Logo                                                                                 | Description                                       |
+|------------------|---------------------------------------------------------------------------------------|---------------------------------------------------|
+| **FastAPI**      | ![FastAPI](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)               | Backend framework for building APIs.             |
+| **Streamlit**    | ![Streamlit](https://streamlit.io/images/brand/streamlit-mark-color.svg)             | Frontend library for creating web applications.  |
+| **MongoDB**      | ![MongoDB](https://upload.wikimedia.org/wikipedia/fr/4/45/MongoDB-Logo.svg)                    | Database for storing predictions.                |
+| **Docker**       | ![Docker](https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png)           | For containerization and orchestration.          |
+| **Scikit-learn** | ![Scikit-learn](https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg) | Machine learning library for model training.     |
+
+
 
 ## **Project Structure**
 
 ```
-mlops-SISE/
+iris-predictor-mlops/
 ├── client/             
-│   ├── app.py             # Main Streamlit app
+│   ├── app.py             # Main Streamlit application
 │   ├── home.py            # Home page logic
-│   ├── metrics.py         # Metrics visualization logic
+│   ├── metrics.py         # Metrics visualization page
 │   ├── predict.py         # Prediction page logic
 │   ├── requirements.txt   # Dependencies for Streamlit
-│   └── Dockerfile         # Docker image for the client
+│   └── Dockerfile         # Dockerfile for the Streamlit client
 │
 ├── server/
 │   ├── app.py             # FastAPI backend
-│   ├── train.py           # Model training script
-│   ├── models/            # Folder to store trained models
+│   ├── train.py           # Training script for ML models
+│   ├── models/            # Folder for trained models
 │   │   ├── Random_Forest_model.pkl
 │   │   ├── SVM_model.pkl
-│   │   ├── Decision_Tree_model.pkl
-│   │   └── XGBoost_model.pkl
+│   │   └── Decision_Tree_model.pkl
 │   ├── requirements.txt   # Dependencies for FastAPI
-│   └── Dockerfile         # Docker image for the server
+│   └── Dockerfile         # Dockerfile for the FastAPI server
 │
 ├── data/                  # Data folder (e.g., Iris.csv)
 │
-├── docker-compose.yml      # Container orchestration file
+├── assets/                # Folder to store images for the README
+│   ├── home_page.png
+│   ├── training_page.png
+│   ├── predict_page.png
+│   ├── metrics_page.png
+│
+├── docker-compose.yml      # Container orchestration configuration
 │
 └── README.md               # Documentation
 ```
 
----
-
-## **Prerequisites**
-
-Make sure you have the following installed:
-- **Docker**: [Installation Guide](https://docs.docker.com/get-docker/)
-- **Docker Compose**: [Installation Guide](https://docs.docker.com/compose/install/)
-- **Python 3.9+** (optional, for local testing)
-
----
 
 ## **Installation and Deployment**
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/lansanacisse/mlops-SISE.git
-cd mlops-SISE
+git clone https://github.com/lansanacisse/iris-predictor-mlops.git
+cd iris-predictor-mlops
 ```
 
-### **2. Build and Launch the Containers**
-Use **Docker Compose** to start the services:
+### **2. Build and Launch the Application**
+Run the following command to start all services:
 ```bash
 docker-compose up --build
 ```
 
 ### **3. Access the Application**
-- **Streamlit User Interface**: [http://localhost:8501](http://localhost:8501)
-- **FastAPI (Swagger UI)**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **MongoDB**: Exposed on port `27017`.
+- **Streamlit Interface**: [http://localhost:8501](http://localhost:8501)
+- **FastAPI (Swagger Docs)**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **MongoDB**: Accessible via port `27017`.
 
----
 
-## **How the Project Works**
-
-### **1. Training Models**
-- Navigate to the **Training Models** tab in the Streamlit app.
-- Select the target column and feature columns.
-- Choose an algorithm (e.g., Random Forest, SVM, Decision Tree, or XGBoost).
-- Configure hyperparameters and train the model.
-- Models are saved in the `server/models` directory for future use.
-
-### **2. Predicting Classes**
-- Go to the **Predict** tab in Streamlit.
-- Input flower dimensions (sepal length, sepal width, petal length, and petal width).
-- Choose a pre-trained model and get predictions with visual feedback.
-
-### **3. Viewing Metrics**
-- Navigate to the **Metrics** tab.
-- Visualize performance metrics, including:
-  - Accuracy.
-  - Confusion matrix.
-  - Classification report.
-
----
 
 ## **Example Usage**
 
-### **1. Train a Model**
-1. Open the Streamlit app: [http://localhost:8501](http://localhost:8501)
-2. Go to the **Training Models** tab.
-3. Upload the dataset or use the default Iris dataset.
-4. Choose the algorithm and configure hyperparameters.
-5. Train the model and save it automatically in the `server/models` directory.
+### **1. Home Page**
+After launching the application, the home page provides an overview of the project. 
 
-### **2. Make a Prediction**
-1. Go to the **Predict** tab.
-2. Enter the dimensions:
-   - **Sepal Length**: 5.1
-   - **Sepal Width**: 3.5
-   - **Petal Length**: 1.4
-   - **Petal Width**: 0.2
-3. Choose a model (e.g., Random Forest) and click **Predict**.
-4. The predicted flower class and an associated image will appear.
+![Home Page](./assets/home_page.png)
 
-### **3. Compare Predictions**
-Use the backend `/compare_models` endpoint to compare predictions from all models for the same input.
 
-#### Example `curl` Command:
-```bash
-curl -X POST http://localhost:8000/compare_models \
--H "Content-Type: application/json" \
--d '{"features": [5.1, 3.5, 1.4, 0.2]}'
-```
 
----
+### **2. Train a Model**
+1. Navigate to the **Training Models** tab in the Streamlit app.
 
-## **Useful Commands**
+   ![Training Models](./assets/training_page.png)
 
-### **1. Check Running Containers**
-```bash
-docker ps
-```
+2. Select your dataset, configure the target and feature columns, choose an algorithm (e.g., **Random Forest**, **SVM**), and set hyperparameters.
+3. Click **Train** to train the model.  
+4. The trained model is saved automatically in the `server/models` directory.
 
-### **2. Stop and Clean Up Containers**
-```bash
-docker-compose down --volumes
-```
 
-### **3. View Data in MongoDB**
-```bash
-docker exec -it mongodb mongo
-use mlops_db
-db.predictions.find()
-```
+### **3. Make a Prediction**
+1. Go to the **Predict** tab in the Streamlit app.
 
----
+   ![Prediction Input](./assets/predict_page.png)
 
-## **Local Testing of the Training Script**
+2. Enter the flower features:
+   - **Sepal Length**: `5.1`
+   - **Sepal Width**: `3.5`
+   - **Petal Length**: `1.4`
+   - **Petal Width**: `0.2`
+3. Choose a model (e.g., **Random Forest**) and click **Predict**.
+4. The app will display the predicted flower class and an image of the flower.
+   ![Prediction Output](./assets/setosa.png)
 
-You can run the training script locally to generate models:
-```bash
-cd server
-python train.py
-```
 
----
+
+### **4. View Metrics**
+1. Navigate to the **Metrics** tab in the Streamlit app.
+
+   ![Metrics](./assets/metrics_page.png)
+
+2. Select a model from the dropdown to view:
+   - **Accuracy**
+   - **Confusion Matrix**
+   - **Classification Report**
+3. Metrics are updated dynamically based on the selected model.
+
+
 
 ## **Contact**
-For questions or feedback, feel free to reach out:
 
-- **Lansana CISSE**
-- **M2 SISE**
+For questions or suggestions, feel free to contact:
+
+- **Author**: Lansana CISSE  
+- **Program**: M2 SISE  
 - **GitHub**: [Lansana CISSE](https://github.com/lansanacisse)
 
----
 
-## **Ready to Start?**
-Run the following command to get started:
+## **Ready to Explore?**
+
+Launch the application by running:
 ```bash
 docker-compose up --build
 ```
 
-🎉 Enjoy exploring the power of MLOps with this Iris Flower Prediction Project! 🌸
-
-
+🎉 Enjoy the **Iris Flower Prediction Project**! 🌸
