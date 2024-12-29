@@ -1,4 +1,3 @@
-# Dockerfile for the Streamlit client
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -6,18 +5,17 @@ WORKDIR /app
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libopenblas-dev \
-    liblapack-dev \
-    libatlas-base-dev \
-    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install dependencies
-COPY client/requirements.txt requirements.txt
+# Install python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY client/ .
+# Copy the app code
+COPY . .
 
-# Run app.py
-CMD ["streamlit", "run", "app.py", "--server.port=8501"]
+# Expose le port 8501
+EXPOSE 8501
+
+# Run the app
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

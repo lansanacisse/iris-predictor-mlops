@@ -1,6 +1,4 @@
-# docker-compose.yml
-
-version: '3.8'
+version: "3.8"
 
 services:
   mongo:
@@ -10,21 +8,28 @@ services:
       - "27017:27017"
 
   server:
-    build: ./server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
     container_name: fastapi_server
     ports:
       - "8000:8000"
     depends_on:
       - mongo
+    volumes:
+      - ./server/models:/app/models # Modèles utilisés par le backend
+      - ./data:/app/data # Données partagées
 
   client:
     build:
-      context: .
-      dockerfile: client/Dockerfile
+      context: ./client
+      dockerfile: Dockerfile
     container_name: streamlit_client
     ports:
       - "8501:8501"
     depends_on:
       - server
     volumes:
-      - ./server/model.pkl:/app/model.pkl
+      - ./server:/app/server # Accès au code du serveur
+      - ./data:/app/data # Données partagées
+      - ./server/models:/app/server/models # Modèles utilisés par le backend

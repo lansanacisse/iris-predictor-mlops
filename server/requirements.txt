@@ -1,6 +1,10 @@
 uvicorn
 fastapi
 pymongo
+streamlit
+pandas
 numpy
 joblib
 scikit-learn
+xgboost
+
