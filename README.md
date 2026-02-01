@@ -1,4 +1,4 @@
-# **MLOps - Iris Flower Prediction Project** 🌸
+# **MLOps - Iris Flower Prediction Project** 
 
 ## **Description**
 This project is a Dockerized web application for predicting the class of Iris flowers (**Iris-setosa**, **Iris-versicolor**, **Iris-virginica**) using **Machine Learning** models. It integrates:
@@ -148,5 +148,3 @@ Launch the application by running:
 ```bash
 docker-compose up --build
 ```
-
-🎉 Enjoy the **Iris Flower Prediction Project**! 🌸
