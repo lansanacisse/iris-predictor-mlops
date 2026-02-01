@@ -1,6 +1,5 @@
 # **MLOps - Iris Flower Prediction Project** 
 
-## **Description**
 This project is a Dockerized web application for predicting the class of Iris flowers (**Iris-setosa**, **Iris-versicolor**, **Iris-virginica**) using **Machine Learning** models. It integrates:
 - **FastAPI**: Backend API to handle predictions.
 - **MongoDB**: To store and retrieve predictions.
@@ -13,20 +12,6 @@ This project is a Dockerized web application for predicting the class of Iris fl
 - 🔮 **Predict Classes**: Input flower features and predict the flower class.
 - 📊 **Analyze Metrics**: View metrics like accuracy, confusion matrices, and classification reports.
 - 🗄 **Save Predictions**: All predictions are stored in **MongoDB** for easy access and analysis.
-
-
-
-## **Technologies Used**
-
-| Technology      | Logo                                                                                 | Description                                       |
-|------------------|---------------------------------------------------------------------------------------|---------------------------------------------------|
-| **FastAPI**      | ![FastAPI](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)               | Backend framework for building APIs.             |
-| **Streamlit**    | ![Streamlit](https://streamlit.io/images/brand/streamlit-mark-color.svg)             | Frontend library for creating web applications.  |
-| **MongoDB**      | ![MongoDB](https://upload.wikimedia.org/wikipedia/fr/4/45/MongoDB-Logo.svg)                    | Database for storing predictions.                |
-| **Docker**       | ![Docker](https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png)           | For containerization and orchestration.          |
-| **Scikit-learn** | ![Scikit-learn](https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg) | Machine learning library for model training.     |
-
-
 
 ## **Project Structure**
 
